@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="one">
+      <label>Insert a String : </label>
+      <input type="text" name="inputtext"  id="text" size="50">
+      <button type="button" name="button" onclick="a_string()">Click Me</button><br><br>
+      <label>The Modified string is : </label>
+      <input type="text" name="modifiedtext" id="mtext" size="50">
+      <button type="button" name="button" onclick="a_replace()">To Show</button><br>
+   </div><br><br>
+    <div>
+      <button type="button" onclick="document.getElementById('demo').innerHTML= Date()"> click to display time and date</button>
+      <p id="demo"></p>
+    </div>
+    <script type="text/javascript">
+     function a_string(){
+        var str=document.getElementById('text').value;
+        var is_a_occurre=str.search(/a/g);
+        document.getElementById('demo1').innerHTML="The occurrence of is at position : "+is_a_occurre;
+      }
+     function a_replace(){
+       var str=document.getElementById('text').value;
+       var modi_str=str.replace(/a\s/g," the ");
+       document.getElementById('mtext').value=modi_str;
+     }
+    </script>
+  </body>
+</html>
