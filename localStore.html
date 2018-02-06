@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>localStorage</title>
+  </head>
+  <body>
+    <div>
+      <p id="loaded"></p>
+        <div class="regbtn"><input type="button" id="mybutton"  value="Enter" onclick="store()">
+    </div>
+    <script type="text/javascript">
+     function store(){
+       var loaded = parseInt(localStorage.getItem('loaded')),
+           loaded_numb = loaded?loaded+1:1;
+           localStorage.setItem('loaded', loaded_numb);
+           text = localStorage.getItem(loaded_numb);
+           var obj = JSON.parse(loaded_numb);
+           console.log(obj);
+           document.getElementById("loaded").innerHTML ="your page is loaded "+ obj +" time";
+        }
+    </script>
+  </body>
+</html>
