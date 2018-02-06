@@ -1,0 +1,176 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<style>
+#myDiv {
+			    bgcolor="7a8b8b";
+
+						 margin-left: 621px;
+						 margin-top: 2em;
+		         border: 1px solid ;
+		         padding: 20px;
+		         border-radius: 5px;
+						 width: 28%;
+}
+#myDiv input{
+  border: 1px solid #ccc;
+	padding: 5px;
+}
+.inputdiv{
+	margin-bottom:25px;
+}
+.lablspn{
+	margin-right: 30px;
+width: 140px;
+display: block;
+float: left;
+}
+.regbtn{
+	margin-left: 5em;
+}
+tr{
+	transition: all .25s ease-in-out;
+}
+tr:hover{
+	background-color : #ccc;
+}
+</style>
+</head>
+
+<body background="/home/Pragati/Downloads/1.jpg">
+		<!-- <form id="myForm" border="3px" class="" action="index.html" method="post";> -->
+			<div id="myDiv">
+						<h3 style="margin-left:100px">REGISTRATION FORM</h3><br>
+					  <div class="inputdiv"><span class="lablspn"> Employee Name</span><input type="textbox" id="ename" name="ename" placeholder="Name"  title="Enter your Name" ></div>
+					  <div class="inputdiv"><span class="lablspn"> Age</span><input type="textbox" id="age" placeholder="Age" title="Enter your Age" ></div>
+					  <div class="inputdiv"><span class="lablspn"> Gender</span><input type="radio"  name="gender" value="male">male
+						    <input type="radio"  name="gender" value="female">female </div>
+					  <div class="inputdiv"><span class="lablspn"> Address</span><input type="text" id="address" placeholder="address" title="Enter your address" ></div>
+					  <div class="inputdiv"> <span class="lablspn"> ContactNumber</span><input type="text" id="number" name="number" placeholder="Number" title="Enter your number"  maxlength="10" ></div>
+					  <div class="regbtn">
+							<input type="button" id="mybutton"  value="Register" onclick="store()">
+						  <input type="button" id="mybutton"  value="reset" onclick="reset()">
+						  <input type="button" name="button" value="Remove" onclick="removeSelectedRow()">
+						  <input type="button" name="button" value="Edit" onclick="editHtmltableSelectedRow()">
+			</div>
+		</div>
+					<div>
+						<table id="myTable" cellpadding="15px" width="20%"  bgcolor="7a8b8b" style="margin-left:36em; margin-top:2em;">
+									<tr>
+										<th>Employee Name </th>
+										<th>Age</th>
+									  <th>Gender</th>
+									  <th>Address</th>
+									  <th>ContactNumber</th>
+						    	</tr>
+							</table>
+					</div>
+
+
+
+					<script>
+					  var wrapper = [];
+						var rIndex;
+						table   = document.getElementById("myTable");
+
+						 function reset()
+									{
+									 var clear = document.getElementById("ename").value="";
+									 var clear2 = document.getElementById("age").value="";
+									 var clear3 = document.getElementById("address").value="";
+									 var clear3 = document.getElementById("number").value="";
+									}
+
+
+
+						 function store()
+						  {
+							  console.log("In function");
+							var ename= document.getElementById("ename").value;
+							var age= document.getElementById("age").value;
+							var gender = document.querySelector('input[name="gender"]:checked').value;
+							var address=document.getElementById("address").value;
+							var number=document.getElementById("number").value;
+
+
+							var myData = new Object();
+								myData.ename =ename;
+								myData.age =age;
+								myData.gender=gender;
+								myData.address=address;
+							  myData.number=number;
+
+								wrapper.push(myData);
+								//localStorage.setItem('userdata', JSON.stringify(myData));
+								//var r = localStorage.getItem('userdata');
+								if (ename==null || ename==""){
+									alert("Name can't be blank");
+										document.myForm.ename.focus();
+											return false;}
+											 else if (age==null || age=="" || age<0 || isNaN(age) || age.length>2)
+											   { alert("Enter a valid age");}
+												  else if(number==null || number=="" || number.length<10  || isNaN(number))
+													{ alert("Enter a valid number");
+
+													     return false; }
+															  else{
+
+										               table   = document.getElementById("myTable");
+																		 row   = table.insertRow(table.length);
+																		 cell1 = row.insertCell(0);
+																		 cell2 = row.insertCell(1);
+																		 cell3 = row.insertCell(2);
+																		 cell4 = row.insertCell(3);
+																		 cell5 = row.insertCell(4);
+																		cell1.innerHTML = myData.ename;
+																		cell2.innerHTML = myData.age;
+																		cell3.innerHTML = myData.gender;
+																		cell4.innerHTML = myData.address;
+																		cell5.innerHTML = myData.number;
+																			}
+																			selectedRowToInput();
+
+															}
+						  function selectedRowToInput()
+								 {
+									 for(var i=0; i < table.rows.length; i++)
+									 {
+										 table.rows[i].onclick = function()
+										 {
+											 rIndex = this.rowIndex;
+													 document.getElementById("ename").value = this.cells[0].innerHTML;
+													 document.getElementById("age").value = this.cells[1].innerHTML;
+													// document.getElementById("gender").value = this.cells[2].innerHTML;
+													 document.getElementById("address").value = this.cells[3].innerHTML;
+													 document.getElementById("number").value = this.cells[4].innerHTML;
+										 };
+									 }
+								 }
+								 function editHtmltableSelectedRow()
+ 					      {
+									table   = document.getElementById("myTable");
+								selectedRowToInput();
+
+								console.log(1);
+				        table = document.getElementById("myTable");
+				        var ename = document.getElementById("ename").value;
+				         var age = document.getElementById("age").value;
+								 //var gender = document.getElementById("gender").value;
+								 var address = document.getElementById("address").value;
+								  var number = document.getElementById("number").value;
+
+				        table.rows[rIndex].cells[0].innerHTML = ename;
+				          table.rows[rIndex].cells[1].innerHTML = age;
+				          //table.rows[rIndex].cells[2].innerHTML = gender;
+									 table.rows[rIndex].cells[3].innerHTML = address;
+									  table.rows[rIndex].cells[4].innerHTML = number;
+
+ 					      }
+								 function removeSelectedRow()
+					       {
+					         table.deleteRow(rIndex);
+					       }
+				</script>
+
+    </body>
+		</html>
